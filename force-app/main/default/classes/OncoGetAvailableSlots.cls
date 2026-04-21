@@ -36,6 +36,32 @@ public without sharing class OncoGetAvailableSlots {
                 continue;
             }
 
+            // Step 0: Smart ID resolution — if serviceTerritoryId is actually an Appointment ID (starts with 08p),
+            // resolve the real serviceTerritoryId, serviceResourceName, and workTypeName from it
+            if (req.serviceTerritoryId != null && req.serviceTerritoryId.startsWith('08p')) {
+                List<ServiceAppointment> apptLookup = [
+                    SELECT ServiceTerritoryId, WorkType.Name
+                    FROM ServiceAppointment
+                    WHERE Id = :req.serviceTerritoryId
+                    LIMIT 1
+                ];
+                if (!apptLookup.isEmpty()) {
+                    req.serviceTerritoryId = apptLookup[0].ServiceTerritoryId;
+                    req.workTypeName = apptLookup[0].WorkType.Name;
+
+                    // Also resolve doctor resource name from AssignedResource
+                    List<AssignedResource> arLookup = [
+                        SELECT ServiceResource.Name
+                        FROM AssignedResource
+                        WHERE ServiceAppointmentId = :apptLookup[0].Id
+                        LIMIT 1
+                    ];
+                    if (!arLookup.isEmpty()) {
+                        req.serviceResourceName = arLookup[0].ServiceResource.Name;
+                    }
+                }
+            }
+
             // Step 1: Get WorkType info directly
             List<WorkType> wtList = [
                 SELECT Id, Name, EstimatedDuration, Description,
