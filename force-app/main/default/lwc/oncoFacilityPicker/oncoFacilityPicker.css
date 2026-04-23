@@ -1,0 +1,87 @@
+/* ===== Prompt ===== */
+.prompt-text {
+    font-size: 13px;
+    color: #54698d;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* ===== Facility Button List ===== */
+.facility-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ===== Facility Pill Button ===== */
+.facility-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border: 1.5px solid #0070d2;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0070d2;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    line-height: 1.35;
+    white-space: normal;
+    word-break: break-word;
+    width: fit-content;
+    max-width: 100%;
+    outline: none;
+}
+
+.facility-btn:hover:not(.disabled):not(.selected) {
+    background: #0070d2;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 112, 210, 0.35);
+    transform: translateY(-1px);
+}
+
+.facility-btn:focus:not(.disabled) {
+    box-shadow: 0 0 0 3px rgba(0, 112, 210, 0.25);
+}
+
+.facility-btn:active:not(.disabled):not(.selected) {
+    transform: translateY(0);
+}
+
+/* ===== Selected ===== */
+.facility-btn.selected {
+    background: #0070d2;
+    color: #ffffff;
+    border-color: #0070d2;
+    cursor: default;
+    box-shadow: 0 2px 6px rgba(0, 112, 210, 0.3);
+}
+
+/* ===== Disabled (after selection) ===== */
+.facility-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: #b0c4de;
+    color: #b0c4de;
+}
+
+/* ===== Check icon ===== */
+.check-icon {
+    margin-left: 2px;
+}
+
+/* ===== Reset link ===== */
+.reset-link {
+    font-size: 12px;
+    color: #0070d2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reset-link:hover {
+    text-decoration: underline;
+}

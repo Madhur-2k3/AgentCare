@@ -1,0 +1,5 @@
+{
+    "title": "Facility Renderer",
+    "description": "Facility Renderer",
+    "lightning:type": "@apexClassType/c__OncoGetFacilitiesByCity$FacilityResponse"
+}

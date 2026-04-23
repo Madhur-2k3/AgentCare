@@ -12,12 +12,17 @@ public without sharing class OncoGetFacilitiesByCity {
         public Integer totalFacilities;
     }
 
+    public class FacilityOutput {
+        @InvocableVariable public FacilityResponse facilityResponse;
+    }
+        
+
     @InvocableMethod(label='Get Facilities By City' description='Find Onco Global facilities/territories in a given city')
-    public static List<FacilityResponse> getFacilities(List<FacilityRequest> requests) {
-        List<FacilityResponse> responses = new List<FacilityResponse>();
+    public static List<FacilityOutput> getFacilities(List<FacilityRequest> requests) {
+        List<FacilityOutput> responses = new List<FacilityOutput>();
 
         for (FacilityRequest req : requests) {
-            FacilityResponse res = new FacilityResponse();
+            FacilityOutput res = new FacilityOutput();
 
             List<ServiceTerritory> territories = [
                 SELECT Id, Name, Street, City, State, PostalCode, Description,
@@ -43,8 +48,8 @@ public without sharing class OncoGetFacilitiesByCity {
                 formatted += '\n';
             }
 
-            res.facilitiesList = formatted;
-            res.totalFacilities = count;
+            res.facilityResponse.facilitiesList = formatted;
+            res.facilityResponse.totalFacilities = count;
             responses.add(res);
         }
         return responses;

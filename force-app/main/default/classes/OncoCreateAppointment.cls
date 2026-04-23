@@ -41,7 +41,7 @@ public without sharing class OncoCreateAppointment {
                 DateTime endTime = req.scheduledStartTime.addMinutes(duration);
 
                 ServiceResource sr = [
-                    SELECT Id, Name FROM ServiceResource
+                    SELECT Id, Name, RelatedRecordId FROM ServiceResource
                     WHERE Name = :req.serviceResourceName LIMIT 1
                 ];
 
@@ -60,6 +60,8 @@ public without sharing class OncoCreateAppointment {
 
                 ServiceAppointment appt = new ServiceAppointment(
                     ParentRecordId = req.patientAccountId,
+                    // AccountId = req.patientAccountId,         // Patient (Person Account)
+                    ContactId = sr.RelatedRecordId,            // Doctor (Contact record linked to ServiceResource)
                     Subject = wt.Name + ' - ' + patientName + ' with ' + doctorName,
                     ServiceTerritoryId = req.serviceTerritoryId,
                     WorkTypeId = wt.Id,
