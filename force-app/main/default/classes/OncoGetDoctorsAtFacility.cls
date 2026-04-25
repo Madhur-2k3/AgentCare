@@ -14,12 +14,17 @@ public without sharing class OncoGetDoctorsAtFacility {
         public Integer totalDoctors;
     }
 
+    public class DoctorOutput {
+        @InvocableVariable public DoctorResponse doctorResponse;
+    }
+
     @InvocableMethod(label='Get Doctors At Facility' description='Find doctors at a facility, optionally filtered by specialty from WorkType')
-    public static List<DoctorResponse> getDoctors(List<DoctorRequest> requests) {
-        List<DoctorResponse> responses = new List<DoctorResponse>();
+    public static List<DoctorOutput> getDoctors(List<DoctorRequest> requests) {
+        List<DoctorOutput> responses = new List<DoctorOutput>();
 
         for (DoctorRequest req : requests) {
-            DoctorResponse res = new DoctorResponse();
+            DoctorOutput out = new DoctorOutput();
+            out.doctorResponse = new DoctorResponse();
 
             // Step 1: Get ServiceResource IDs assigned to this territory
             List<ServiceTerritoryMember> members = [
@@ -31,9 +36,9 @@ public without sharing class OncoGetDoctorsAtFacility {
             ];
 
             if (members.isEmpty()) {
-                res.doctorsList = 'No doctors are currently assigned to this facility.';
-                res.totalDoctors = 0;
-                responses.add(res);
+                out.doctorResponse.doctorsList = 'No doctors are currently assigned to this facility.';
+                out.doctorResponse.totalDoctors = 0;
+                responses.add(out);
                 continue;
             }
 
@@ -141,10 +146,11 @@ public without sharing class OncoGetDoctorsAtFacility {
                 }
             }
 
-            res.doctorsList = formatted;
-            res.totalDoctors = count;
-            responses.add(res);
+            out.doctorResponse.doctorsList = formatted;
+            out.doctorResponse.totalDoctors = count;
+            responses.add(out);
         }
         return responses;
     }
 }
+

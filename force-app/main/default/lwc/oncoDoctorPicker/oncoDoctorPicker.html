@@ -1,0 +1,60 @@
+<template>
+    <div class="container">
+        <template lwc:if={hasDoctors}>
+            <div class="header">
+                <lightning-icon icon-name="standard:people" size="small"></lightning-icon>
+                <span class="header-text">{totalDoctors} Doctors Available</span>
+            </div>
+            <template lwc:if={hasNote}>
+                <div class="note-banner">
+                    <lightning-icon icon-name="utility:warning" size="xx-small" class="note-icon"></lightning-icon>
+                    <span>{noteText}</span>
+                </div>
+            </template>
+            <div class="select-prompt">
+                <lightning-icon icon-name="utility:touch_action" size="xx-small" class="prompt-icon"></lightning-icon>
+                <span>Tap a doctor to select</span>
+            </div>
+            <div class="doctor-list">
+                <template for:each={doctors} for:item="doctor">
+                    <div key={doctor.resource} class={doctor.cardClass} data-resource={doctor.resource} data-name={doctor.name} onclick={handleDoctorClick} role="button" tabindex="0">
+                        <div class="doctor-name-row">
+                            <lightning-icon icon-name="standard:individual" size="x-small" class="doctor-icon"></lightning-icon>
+                            <span class="doctor-name-text">{doctor.name}</span>
+                            <template lwc:if={doctor.isSelected}>
+                                <lightning-icon icon-name="utility:check" size="xx-small" class="check-icon" variant="success"></lightning-icon>
+                            </template>
+                        </div>
+                        <template lwc:if={doctor.specialty}>
+                            <div class="doctor-specialty">
+                                <lightning-icon icon-name="utility:ribbon" size="xx-small" class="detail-icon"></lightning-icon>
+                                <span>{doctor.specialty}</span>
+                                <template lwc:if={doctor.isSpecialtyMatch}>
+                                    <span class="match-badge">✓ Match</span>
+                                </template>
+                            </div>
+                        </template>
+                        <template lwc:if={doctor.title}>
+                            <div class="doctor-detail">
+                                <lightning-icon icon-name="utility:identity" size="xx-small" class="detail-icon"></lightning-icon>
+                                <span>{doctor.title}</span>
+                            </div>
+                        </template>
+                        <template lwc:if={doctor.schedule}>
+                            <div class="doctor-detail">
+                                <lightning-icon icon-name="utility:clock" size="xx-small" class="detail-icon"></lightning-icon>
+                                <span>{doctor.schedule}</span>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="empty-state">
+                <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                <span>No doctors found at this facility.</span>
+            </div>
+        </template>
+    </div>
+</template>
