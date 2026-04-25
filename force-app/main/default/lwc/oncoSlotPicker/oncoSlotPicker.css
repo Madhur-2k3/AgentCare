@@ -4,58 +4,162 @@
     font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* ===== Header ===== */
-.header {
+/* ===== Doctor Header ===== */
+.doctor-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #e5e5e5;
+    gap: 10px;
+    padding: 10px 12px;
+    background: linear-gradient(135deg, #0d7e9e 0%, #0b6a86 100%);
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
 }
 
-.header-text {
-    font-size: 13px;
-    font-weight: 700;
-    color: #181818;
-    letter-spacing: 0.02em;
-}
-
-/* ===== Date Badge ===== */
-.date-badge {
+.doctor-avatar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    background: linear-gradient(135deg, #0d9ddb 0%, #0b78b9 100%);
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.date-icon {
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
     flex-shrink: 0;
-    --sds-c-icon-color-foreground-default: #fff;
 }
 
-.date-text {
-    font-size: 13px;
-    font-weight: 600;
+.doctor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.doctor-name {
+    font-size: 14px;
+    font-weight: 700;
     color: #ffffff;
-    flex: 1;
 }
 
-.duration-badge {
-    font-size: 10px;
+.doctor-type {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== Date Carousel ===== */
+.date-carousel {
+    background: #f0f8fb;
+    border: 1px solid #c0dfe8;
+    border-top: none;
+    padding: 10px 6px;
+}
+
+.doctor-header + .date-carousel {
+    border-radius: 0;
+}
+
+.date-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    color: #0d7e9e;
+    transition: background 0.15s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(13, 126, 158, 0.1);
+}
+
+.nav-btn-disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* ===== Date Chips ===== */
+.date-chips {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.date-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 42px;
+    padding: 5px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+    border: 1.5px solid transparent;
+    background: transparent;
+}
+
+.date-chip:hover {
+    background: rgba(13, 126, 158, 0.08);
+    border-color: #b0d5e0;
+}
+
+.date-chip-selected {
+    background: #0d7e9e;
+    border-color: #0d7e9e;
+}
+
+.date-chip-selected:hover {
+    background: #0b6a86;
+    border-color: #0b6a86;
+}
+
+.chip-day {
+    font-size: 9px;
     font-weight: 600;
-    color: #0d9ddb;
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 2px 8px;
+    color: #5a7a85;
+    letter-spacing: 0.04em;
+}
+
+.chip-num {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1b3a57;
+    line-height: 1.2;
+}
+
+.date-chip-selected .chip-day,
+.date-chip-selected .chip-num {
+    color: #ffffff;
+}
+
+/* ===== Loading State ===== */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 16px;
+}
+
+.loading-text {
+    font-size: 12px;
+    color: #706e6b;
 }
 
 /* ===== Slot Group ===== */
 .slot-group {
-    margin-bottom: 10px;
+    padding: 8px 4px;
 }
 
 .group-label {
@@ -68,13 +172,14 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin-bottom: 6px;
+    padding-left: 2px;
 }
 
 .group-icon {
     font-size: 13px;
 }
 
-/* ===== Slot Grid — Apollo-style time pills ===== */
+/* ===== Slot Grid ===== */
 .slot-grid {
     display: flex;
     flex-wrap: wrap;
@@ -105,7 +210,6 @@
     transform: scale(0.95);
 }
 
-/* ===== Selected Pill ===== */
 .slot-pill-selected {
     border-color: #0d9ddb;
     background: #0d9ddb;
@@ -125,7 +229,6 @@
     --sds-c-icon-color-foreground-default: #fff;
 }
 
-/* ===== Pill Content ===== */
 .pill-icon {
     flex-shrink: 0;
     --sds-c-icon-color-foreground-default: #0d9ddb;
@@ -142,7 +245,7 @@
     margin-left: 2px;
 }
 
-/* ===== Prep Instructions ===== */
+/* ===== Prep Banner ===== */
 .prep-banner {
     display: flex;
     align-items: flex-start;
@@ -153,7 +256,7 @@
     border: 1px solid #b8daf2;
     border-radius: 6px;
     padding: 6px 10px;
-    margin-bottom: 8px;
+    margin: 6px 4px 8px;
     line-height: 1.4;
 }
 
@@ -172,6 +275,7 @@
     padding: 4px 8px;
     background: #fafaf9;
     border-radius: 6px;
+    margin: 0 4px;
 }
 
 .prompt-icon {
@@ -184,7 +288,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 16px;
+    padding: 20px 16px;
     color: #54698d;
     font-size: 13px;
 }
