@@ -22,12 +22,17 @@ public without sharing class OncoCreateAppointment {
         public String confirmationMessage;
     }
 
+    public class BookingOutput {
+        @InvocableVariable public BookingResponse bookingResponse;
+    }
+
     @InvocableMethod(label='Create Appointment' description='Book a new appointment by creating ServiceAppointment and AssignedResource')
-    public static List<BookingResponse> createAppointment(List<BookingRequest> requests) {
-        List<BookingResponse> responses = new List<BookingResponse>();
+    public static List<BookingOutput> createAppointment(List<BookingRequest> requests) {
+        List<BookingOutput> responses = new List<BookingOutput>();
 
         for (BookingRequest req : requests) {
-            BookingResponse res = new BookingResponse();
+            BookingOutput out = new BookingOutput();
+            out.bookingResponse = new BookingResponse();
 
             try {
                 // Get WorkType directly
@@ -108,9 +113,9 @@ public without sharing class OncoCreateAppointment {
                 );
                 insert assignedRes;
 
-                res.success = true;
-                res.appointmentId = appt.Id;
-                res.confirmationMessage = 'Appointment Booked Successfully!\n\n'
+                out.bookingResponse.success = true;
+                out.bookingResponse.appointmentId = appt.Id;
+                out.bookingResponse.confirmationMessage = 'Appointment Booked Successfully!\n\n'
                     + 'Patient: ' + patientName + '\n'
                     + 'Doctor: ' + doctorName + '\n'
                     + 'Type: ' + wt.Name + '\n'
@@ -123,13 +128,14 @@ public without sharing class OncoCreateAppointment {
                     + 'Please arrive 15 minutes before your scheduled time.';
 
             } catch (Exception e) {
-                res.success = false;
-                res.confirmationMessage = 'Booking failed: ' + e.getMessage()
+                out.bookingResponse.success = false;
+                out.bookingResponse.confirmationMessage = 'Booking failed: ' + e.getMessage()
                     + '. Please try again or contact 1800-ONCO-HELP.';
             }
 
-            responses.add(res);
+            responses.add(out);
         }
         return responses;
     }
 }
+

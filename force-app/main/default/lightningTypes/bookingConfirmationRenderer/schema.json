@@ -1,0 +1,5 @@
+{
+    "title": "Booking Confirmation Renderer",
+    "description": "Booking Confirmation Renderer",
+    "lightning:type": "@apexClassType/c__OncoCreateAppointment$BookingResponse"
+}

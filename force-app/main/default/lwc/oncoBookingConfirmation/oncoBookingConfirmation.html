@@ -1,0 +1,117 @@
+<template>
+    <div class="container">
+        <!-- SUCCESS STATE -->
+        <template lwc:if={isSuccess}>
+            <div class="confirmation-card">
+                <!-- Success Header -->
+                <div class="success-header">
+                    <div class="success-icon-wrap">
+                        <lightning-icon icon-name="action:approval" size="small"></lightning-icon>
+                    </div>
+                    <div class="success-title">Appointment Confirmed!</div>
+                </div>
+
+                <template lwc:if={hasBooking}>
+                    <!-- Appointment ID Badge -->
+                    <div class="id-badge">
+                        <lightning-icon icon-name="utility:bookmark" size="xx-small" class="id-icon"></lightning-icon>
+                        <span class="id-text">{booking.appointmentId}</span>
+                    </div>
+
+                    <!-- Details Section -->
+                    <div class="details-section">
+                        <div class="detail-row">
+                            <lightning-icon icon-name="standard:individual" size="xx-small" class="row-icon"></lightning-icon>
+                            <div class="row-content">
+                                <span class="row-label">Patient</span>
+                                <span class="row-value">{booking.patient}</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <lightning-icon icon-name="standard:people" size="xx-small" class="row-icon"></lightning-icon>
+                            <div class="row-content">
+                                <span class="row-label">Doctor</span>
+                                <span class="row-value">{booking.doctor}</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <lightning-icon icon-name="utility:ribbon" size="xx-small" class="row-icon"></lightning-icon>
+                            <div class="row-content">
+                                <span class="row-label">Type</span>
+                                <span class="row-value">{booking.type}</span>
+                            </div>
+                        </div>
+                        <div class="detail-divider"></div>
+                        <div class="detail-row">
+                            <lightning-icon icon-name="custom:custom94" size="xx-small" class="row-icon"></lightning-icon>
+                            <div class="row-content">
+                                <span class="row-label">Facility</span>
+                                <span class="row-value">{booking.facility}</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <lightning-icon icon-name="utility:location" size="xx-small" class="row-icon"></lightning-icon>
+                            <div class="row-content">
+                                <span class="row-label">Address</span>
+                                <span class="row-value">{booking.address}</span>
+                            </div>
+                        </div>
+                        <div class="detail-divider"></div>
+                        <div class="detail-row highlight-row">
+                            <lightning-icon icon-name="utility:date_time" size="xx-small" class="row-icon"></lightning-icon>
+                            <div class="row-content">
+                                <span class="row-label">Date &amp; Time</span>
+                                <span class="row-value row-value-highlight">{booking.dateTime}</span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <lightning-icon icon-name="utility:clock" size="xx-small" class="row-icon"></lightning-icon>
+                            <div class="row-content">
+                                <span class="row-label">Duration</span>
+                                <span class="row-value">{booking.duration}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preparation Banner -->
+                    <template lwc:if={hasPreparation}>
+                        <div class="prep-banner">
+                            <lightning-icon icon-name="utility:info_alt" size="xx-small" class="prep-icon"></lightning-icon>
+                            <div class="prep-content">
+                                <span class="prep-label">Preparation</span>
+                                <span class="prep-text">{booking.preparation}</span>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Arrival Note -->
+                    <template lwc:if={hasArrivalNote}>
+                        <div class="arrival-note">
+                            <lightning-icon icon-name="utility:warning" size="xx-small" class="arrival-icon"></lightning-icon>
+                            <span>{booking.arrivalNote}</span>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </template>
+
+        <!-- FAILURE STATE -->
+        <template lwc:elseif={isFailure}>
+            <div class="error-card">
+                <div class="error-header">
+                    <lightning-icon icon-name="action:close" size="small"></lightning-icon>
+                    <span class="error-title">Booking Failed</span>
+                </div>
+                <div class="error-message">{errorMessage}</div>
+            </div>
+        </template>
+
+        <!-- EMPTY STATE -->
+        <template lwc:else>
+            <div class="empty-state">
+                <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                <span>No booking information available.</span>
+            </div>
+        </template>
+    </div>
+</template>
