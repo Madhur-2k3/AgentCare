@@ -1,0 +1,5 @@
+{
+    "title": "Slot Renderer",
+    "description": "Slot Renderer",
+    "lightning:type": "@apexClassType/c__OncoGetAvailableSlots$SlotResponse"
+}

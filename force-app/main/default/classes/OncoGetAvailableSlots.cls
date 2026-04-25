@@ -22,17 +22,22 @@ public without sharing class OncoGetAvailableSlots {
         public String prepInstructions;
     }
 
+    public class SlotOutput {
+        @InvocableVariable public SlotResponse slotResponse;
+    }
+
     @InvocableMethod(label='Get Available Slots' description='Find available appointment slots based on doctor operating hours and existing bookings')
-    public static List<SlotResponse> getAvailableSlots(List<SlotRequest> requests) {
-        List<SlotResponse> responses = new List<SlotResponse>();
+    public static List<SlotOutput> getAvailableSlots(List<SlotRequest> requests) {
+        List<SlotOutput> responses = new List<SlotOutput>();
 
         for (SlotRequest req : requests) {
-            SlotResponse res = new SlotResponse();
+            SlotOutput out = new SlotOutput();
+            out.slotResponse = new SlotResponse();
 
             if (req.preferredDate < Date.today().addDays(2)) {
-                res.availableSlots = 'Please select a date at least 2 days from today.';
-                res.totalSlots = 0;
-                responses.add(res);
+                out.slotResponse.availableSlots = 'Please select a date at least 2 days from today.';
+                out.slotResponse.totalSlots = 0;
+                responses.add(out);
                 continue;
             }
 
@@ -71,9 +76,9 @@ public without sharing class OncoGetAvailableSlots {
             ];
 
             if (wtList.isEmpty()) {
-                res.availableSlots = 'Invalid appointment type.';
-                res.totalSlots = 0;
-                responses.add(res);
+                out.slotResponse.availableSlots = 'Invalid appointment type.';
+                out.slotResponse.totalSlots = 0;
+                responses.add(out);
                 continue;
             }
 
@@ -82,8 +87,8 @@ public without sharing class OncoGetAvailableSlots {
             Integer blockBefore = wt.BlockTimeBeforeAppointment != null ? (Integer) wt.BlockTimeBeforeAppointment : 0;
             Integer blockAfter = wt.BlockTimeAfterAppointment != null ? (Integer) wt.BlockTimeAfterAppointment : 0;
             Integer totalBlock = duration + blockBefore + blockAfter;
-            res.durationMinutes = duration;
-            res.prepInstructions = wt.Description;
+            out.slotResponse.durationMinutes = duration;
+            out.slotResponse.prepInstructions = wt.Description;
 
             // Step 2: Get doctor's operating hours for the day
             String dayOfWeek = getDayOfWeek(req.preferredDate);
@@ -116,9 +121,9 @@ public without sharing class OncoGetAvailableSlots {
             }
 
             if (operatingHoursId == null) {
-                res.availableSlots = 'Could not find operating hours for this doctor at this facility.';
-                res.totalSlots = 0;
-                responses.add(res);
+                out.slotResponse.availableSlots = 'Could not find operating hours for this doctor at this facility.';
+                out.slotResponse.totalSlots = 0;
+                responses.add(out);
                 continue;
             }
 
@@ -131,9 +136,9 @@ public without sharing class OncoGetAvailableSlots {
             ];
 
             if (doctorSlots.isEmpty()) {
-                res.availableSlots = 'The doctor does not have clinic hours on ' + dayOfWeek + '. Please try another date.';
-                res.totalSlots = 0;
-                responses.add(res);
+                out.slotResponse.availableSlots = 'The doctor does not have clinic hours on ' + dayOfWeek + '. Please try another date.';
+                out.slotResponse.totalSlots = 0;
+                responses.add(out);
                 continue;
             }
 
@@ -186,9 +191,9 @@ public without sharing class OncoGetAvailableSlots {
                 formatted = 'No available slots on ' + req.preferredDate.format() + '. Please try another date.';
             }
 
-            res.availableSlots = formatted;
-            res.totalSlots = count;
-            responses.add(res);
+            out.slotResponse.availableSlots = formatted;
+            out.slotResponse.totalSlots = count;
+            responses.add(out);
         }
         return responses;
     }
@@ -198,3 +203,4 @@ public without sharing class OncoGetAvailableSlots {
         return dt.format('EEEE');
     }
 }
+

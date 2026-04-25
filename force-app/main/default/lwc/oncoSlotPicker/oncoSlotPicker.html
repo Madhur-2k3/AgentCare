@@ -1,0 +1,81 @@
+<template>
+    <div class="container">
+        <template lwc:if={hasSlots}>
+            <!-- Header -->
+            <div class="header">
+                <lightning-icon icon-name="standard:date_time" size="small"></lightning-icon>
+                <span class="header-text">{totalSlots} Slots Available</span>
+            </div>
+
+            <!-- Date Badge -->
+            <div class="date-badge">
+                <lightning-icon icon-name="utility:date_input" size="xx-small" class="date-icon"></lightning-icon>
+                <span class="date-text">{appointmentDate}</span>
+                <span class="duration-badge">{durationMinutes} min each</span>
+            </div>
+
+            <!-- Slot Groups -->
+            <template lwc:if={hasSlotGroups}>
+                <template for:each={slotGroups} for:item="group">
+                    <div key={group.period} class="slot-group">
+                        <div class="group-label">
+                            <span class="group-icon">{group.icon}</span>
+                            <span>{group.period}</span>
+                        </div>
+                        <div class="slot-grid">
+                            <template for:each={group.slots} for:item="slot">
+                                <div
+                                    key={slot.key}
+                                    class={slot.pillClass}
+                                    data-key={slot.key}
+                                    data-start={slot.startTime}
+                                    data-end={slot.endTime}
+                                    data-date={slot.date}
+                                    onclick={handleSlotClick}
+                                    role="button"
+                                    tabindex="0"
+                                >
+                                    <lightning-icon icon-name="utility:clock" size="xx-small" class="pill-icon"></lightning-icon>
+                                    <span class="pill-time">{slot.startTime}</span>
+                                    <template lwc:if={slot.isSelected}>
+                                        <lightning-icon icon-name="utility:check" size="xx-small" class="pill-check" variant="inverse"></lightning-icon>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <!-- Prep Instructions -->
+            <template lwc:if={hasPrepInstructions}>
+                <div class="prep-banner">
+                    <lightning-icon icon-name="utility:info_alt" size="xx-small" class="prep-icon"></lightning-icon>
+                    <span>{prepInstructions}</span>
+                </div>
+            </template>
+
+            <!-- Tap Hint -->
+            <div class="select-prompt">
+                <lightning-icon icon-name="utility:touch_action" size="xx-small" class="prompt-icon"></lightning-icon>
+                <span>Tap a time slot to select</span>
+            </div>
+        </template>
+
+        <!-- Info/Error Message -->
+        <template lwc:elseif={hasInfoMessage}>
+            <div class="info-state">
+                <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                <span>{infoMessage}</span>
+            </div>
+        </template>
+
+        <!-- Empty State -->
+        <template lwc:else>
+            <div class="empty-state">
+                <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                <span>No available time slots.</span>
+            </div>
+        </template>
+    </div>
+</template>
