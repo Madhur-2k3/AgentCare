@@ -8,12 +8,28 @@
                 </span>
             </div>
 
+            <div class="select-prompt">
+                <lightning-icon icon-name="utility:touch_action" size="xx-small" class="prompt-icon"></lightning-icon>
+                <span>Tap a facility to select it</span>
+            </div>
+
             <div class="facility-list">
                 <template for:each={facilities} for:item="facility">
-                    <div key={facility.territoryId} class="facility-card">
+                    <div
+                        key={facility.territoryId}
+                        class={facility.cardClass}
+                        data-territoryid={facility.territoryId}
+                        data-name={facility.name}
+                        onclick={handleFacilityClick}
+                        role="button"
+                        tabindex="0"
+                    >
                         <div class="facility-name">
                             <lightning-icon icon-name="custom:custom94" size="x-small" class="hospital-icon"></lightning-icon>
-                            {facility.name}
+                            <span class="facility-name-text">{facility.name}</span>
+                            <template lwc:if={facility.isSelected}>
+                                <lightning-icon icon-name="utility:check" size="xx-small" class="check-icon" variant="success"></lightning-icon>
+                            </template>
                         </div>
                         <div class="facility-detail">
                             <lightning-icon icon-name="utility:location" size="xx-small" class="detail-icon"></lightning-icon>
@@ -36,3 +52,4 @@
         </template>
     </div>
 </template>
+
