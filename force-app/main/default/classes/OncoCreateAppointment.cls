@@ -58,10 +58,30 @@ public without sharing class OncoCreateAppointment {
                     ? st.Description.replace('Scheduling territory for ', '')
                     : st.Name;
 
+                // Resolve the doctor's Contact record.
+                // ServiceResource.RelatedRecordId is a User (005) without a linked Contact,
+                // so we derive the name from serviceResourceName (e.g. SR_Ananya_Rao)
+                // and look up the doctor Contact directly by name.
+                Id doctorContactId = null;
+
+                // SR_Ananya_Rao → ['Ananya', 'Rao']
+                String cleanName = req.serviceResourceName.replace('SR_', '');
+                List<String> nameParts = cleanName.split('_');
+                if (nameParts.size() >= 2) {
+                    String firstName = nameParts[0];
+                    String lastName = nameParts[nameParts.size() - 1];
+                    List<Contact> doctorContacts = [
+                        SELECT Id FROM Contact
+                        WHERE FirstName = :firstName AND LastName = :lastName
+                        LIMIT 1
+                    ];
+                    if (!doctorContacts.isEmpty()) {
+                        doctorContactId = doctorContacts[0].Id;
+                    }
+                }
+
                 ServiceAppointment appt = new ServiceAppointment(
                     ParentRecordId = req.patientAccountId,
-                    // AccountId = req.patientAccountId,         // Patient (Person Account)
-                    ContactId = sr.RelatedRecordId,            // Doctor (Contact record linked to ServiceResource)
                     Subject = wt.Name + ' - ' + patientName + ' with ' + doctorName,
                     ServiceTerritoryId = req.serviceTerritoryId,
                     WorkTypeId = wt.Id,
@@ -75,6 +95,11 @@ public without sharing class OncoCreateAppointment {
                     PostalCode = st.PostalCode,
                     Country = st.Country
                 );
+
+                // Only set ContactId if we resolved a valid Contact
+                if (doctorContactId != null) {
+                    appt.ContactId = doctorContactId;
+                }
                 insert appt;
 
                 AssignedResource assignedRes = new AssignedResource(

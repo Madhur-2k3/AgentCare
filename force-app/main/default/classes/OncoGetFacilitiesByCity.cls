@@ -23,6 +23,7 @@ public without sharing class OncoGetFacilitiesByCity {
 
         for (FacilityRequest req : requests) {
             FacilityOutput res = new FacilityOutput();
+            res.facilityResponse = new FacilityResponse();
 
             List<ServiceTerritory> territories = [
                 SELECT Id, Name, Street, City, State, PostalCode, Description,

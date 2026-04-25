@@ -1,6 +1,38 @@
 <template>
-    <lightning-card title="Select a Facility" icon-name="standard:location">
-        <h1>Hello</h1>
+    <div class="container">
+        <template lwc:if={hasFacilities}>
+            <div class="header">
+                <lightning-icon icon-name="standard:location" size="small"></lightning-icon>
+                <span class="header-text">
+                    {totalFacilities} Facilities Found
+                </span>
+            </div>
 
-    </lightning-card>
+            <div class="facility-list">
+                <template for:each={facilities} for:item="facility">
+                    <div key={facility.territoryId} class="facility-card">
+                        <div class="facility-name">
+                            <lightning-icon icon-name="custom:custom94" size="x-small" class="hospital-icon"></lightning-icon>
+                            {facility.name}
+                        </div>
+                        <div class="facility-detail">
+                            <lightning-icon icon-name="utility:location" size="xx-small" class="detail-icon"></lightning-icon>
+                            <span>{facility.address}</span>
+                        </div>
+                        <div class="facility-detail">
+                            <lightning-icon icon-name="utility:clock" size="xx-small" class="detail-icon"></lightning-icon>
+                            <span>{facility.hours}</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <div class="empty-state">
+                <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                <span>No facilities found for the requested city.</span>
+            </div>
+        </template>
+    </div>
 </template>
