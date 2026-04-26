@@ -1,27 +1,32 @@
 /* ===== Container ===== */
 .container {
-    padding: 8px 4px;
+    padding: 4px;
     font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e0e5ec;
+    background: #ffffff;
 }
 
-/* ===== Doctor Header ===== */
+/* ===== Doctor Header — dark premium gradient ===== */
 .doctor-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    background: linear-gradient(135deg, #0d7e9e 0%, #0b6a86 100%);
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 0;
+    gap: 12px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #1a2a3a 0%, #0f4c5c 50%, #0d8a6e 100%);
+    border-radius: 12px 12px 0 0;
 }
 
 .doctor-avatar {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -29,59 +34,56 @@
 .doctor-info {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 2px;
 }
 
 .doctor-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #ffffff;
+    letter-spacing: 0.01em;
 }
 
 .doctor-type {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
 }
 
 /* ===== Date Carousel ===== */
 .date-carousel {
-    background: #f0f8fb;
-    border: 1px solid #c0dfe8;
-    border-top: none;
+    background: linear-gradient(180deg, #f3f7fa 0%, #eaf0f5 100%);
     padding: 10px 6px;
-}
-
-.doctor-header + .date-carousel {
-    border-radius: 0;
+    border-bottom: 1px solid #dce3ea;
 }
 
 .date-nav {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
 }
 
 .nav-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     border: none;
     background: transparent;
     border-radius: 50%;
     cursor: pointer;
     flex-shrink: 0;
-    color: #0d7e9e;
-    transition: background 0.15s ease;
+    color: #3d5a6e;
+    transition: all 0.15s ease;
 }
 
 .nav-btn:hover {
-    background: rgba(13, 126, 158, 0.1);
+    background: rgba(15, 76, 92, 0.1);
 }
 
 .nav-btn-disabled {
-    opacity: 0.3;
+    opacity: 0.25;
     cursor: default;
     pointer-events: none;
 }
@@ -89,7 +91,7 @@
 /* ===== Date Chips ===== */
 .date-chips {
     display: flex;
-    gap: 4px;
+    gap: 3px;
     flex: 1;
     justify-content: center;
     overflow-x: auto;
@@ -99,46 +101,49 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 42px;
-    padding: 5px 6px;
-    border-radius: 8px;
+    min-width: 44px;
+    padding: 5px 7px;
+    border-radius: 10px;
     cursor: pointer;
     user-select: none;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     border: 1.5px solid transparent;
     background: transparent;
 }
 
 .date-chip:hover {
-    background: rgba(13, 126, 158, 0.08);
-    border-color: #b0d5e0;
+    background: rgba(15, 76, 92, 0.08);
+    border-color: #c0d8e2;
 }
 
 .date-chip-selected {
-    background: #0d7e9e;
-    border-color: #0d7e9e;
+    background: linear-gradient(135deg, #0f4c5c 0%, #0d8a6e 100%);
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(13, 138, 110, 0.35);
 }
 
 .date-chip-selected:hover {
-    background: #0b6a86;
-    border-color: #0b6a86;
+    background: linear-gradient(135deg, #0d3e4d 0%, #0b7a60 100%);
 }
 
 .chip-day {
     font-size: 9px;
-    font-weight: 600;
-    color: #5a7a85;
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    color: #7a8f9e;
+    letter-spacing: 0.05em;
 }
 
 .chip-num {
-    font-size: 15px;
-    font-weight: 700;
-    color: #1b3a57;
+    font-size: 16px;
+    font-weight: 800;
+    color: #1a2a3a;
     line-height: 1.2;
 }
 
-.date-chip-selected .chip-day,
+.date-chip-selected .chip-day {
+    color: rgba(255, 255, 255, 0.85);
+}
+
 .date-chip-selected .chip-num {
     color: #ffffff;
 }
@@ -149,34 +154,35 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    padding: 24px 16px;
+    padding: 28px 16px;
 }
 
 .loading-text {
     font-size: 12px;
-    color: #706e6b;
+    color: #7a8f9e;
+    font-weight: 500;
 }
 
 /* ===== Slot Group ===== */
 .slot-group {
-    padding: 8px 4px;
+    padding: 10px 8px 6px;
 }
 
 .group-label {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     font-size: 11px;
-    font-weight: 600;
-    color: #54698d;
+    font-weight: 700;
+    color: #5a6f7e;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 6px;
-    padding-left: 2px;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    padding-left: 4px;
 }
 
 .group-icon {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 /* ===== Slot Grid ===== */
@@ -186,39 +192,43 @@
     gap: 8px;
 }
 
-/* ===== Slot Pill ===== */
+/* ===== Slot Pill — vibrant teal accent ===== */
 .slot-pill {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 8px 14px;
-    background: #f4f9fe;
-    border: 1.5px solid #c9dff0;
-    border-radius: 20px;
+    gap: 6px;
+    padding: 9px 16px;
+    background: #ffffff;
+    border: 1.5px solid #d0dde5;
+    border-radius: 22px;
     cursor: pointer;
     user-select: none;
     transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .slot-pill:hover {
-    border-color: #0d9ddb;
-    background: #e3f2fd;
-    box-shadow: 0 2px 6px rgba(13, 157, 219, 0.15);
+    border-color: #0d8a6e;
+    background: #f0faf7;
+    box-shadow: 0 3px 10px rgba(13, 138, 110, 0.15);
+    transform: translateY(-1px);
 }
 
 .slot-pill:active {
-    transform: scale(0.95);
+    transform: scale(0.96) translateY(0);
+    box-shadow: 0 1px 4px rgba(13, 138, 110, 0.2);
 }
 
+/* ===== Selected Pill — rich emerald ===== */
 .slot-pill-selected {
-    border-color: #0d9ddb;
-    background: #0d9ddb;
-    box-shadow: 0 2px 8px rgba(13, 157, 219, 0.3);
+    border-color: transparent;
+    background: linear-gradient(135deg, #0f4c5c 0%, #0d8a6e 100%);
+    box-shadow: 0 3px 12px rgba(13, 138, 110, 0.35);
 }
 
 .slot-pill-selected:hover {
-    background: #0b8ac7;
-    border-color: #0b8ac7;
+    background: linear-gradient(135deg, #0d3e4d 0%, #0b7a60 100%);
+    box-shadow: 0 4px 14px rgba(13, 138, 110, 0.4);
 }
 
 .slot-pill-selected .pill-time {
@@ -226,18 +236,20 @@
 }
 
 .slot-pill-selected .pill-icon {
-    --sds-c-icon-color-foreground-default: #fff;
+    --sds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.9);
 }
 
+/* ===== Pill Content ===== */
 .pill-icon {
     flex-shrink: 0;
-    --sds-c-icon-color-foreground-default: #0d9ddb;
+    --sds-c-icon-color-foreground-default: #0d8a6e;
 }
 
 .pill-time {
     font-size: 13px;
-    font-weight: 600;
-    color: #1b3a57;
+    font-weight: 700;
+    color: #1a2a3a;
+    letter-spacing: 0.01em;
 }
 
 .pill-check {
@@ -249,20 +261,20 @@
 .prep-banner {
     display: flex;
     align-items: flex-start;
-    gap: 6px;
+    gap: 8px;
     font-size: 11px;
-    color: #0d6ebd;
-    background: #e8f4fd;
-    border: 1px solid #b8daf2;
-    border-radius: 6px;
-    padding: 6px 10px;
-    margin: 6px 4px 8px;
-    line-height: 1.4;
+    color: #0f4c5c;
+    background: linear-gradient(135deg, #e6f7f3 0%, #eef8f5 100%);
+    border: 1px solid #b4e0d2;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 8px 6px 10px;
+    line-height: 1.5;
 }
 
 .prep-icon {
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 2px;
 }
 
 /* ===== Select Prompt ===== */
@@ -271,11 +283,12 @@
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    color: #706e6b;
-    padding: 4px 8px;
-    background: #fafaf9;
-    border-radius: 6px;
-    margin: 0 4px;
+    color: #7a8f9e;
+    font-weight: 500;
+    padding: 5px 10px;
+    background: #f7f9fb;
+    border-radius: 8px;
+    margin: 0 6px 4px;
 }
 
 .prompt-icon {
@@ -288,7 +301,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 20px 16px;
-    color: #54698d;
+    padding: 24px 16px;
+    color: #5a6f7e;
     font-size: 13px;
+    font-weight: 500;
 }
