@@ -16,12 +16,17 @@ public without sharing class OncoGetPatientAppointments {
         public String patientAccountId;
     }
 
+    public class AppointmentOutput {
+        @InvocableVariable public AppointmentResponse appointmentResponse;
+    }
+
     @InvocableMethod(label='Get Patient Appointments' description='Retrieve upcoming or past appointments for a patient using their email')
-    public static List<AppointmentResponse> getAppointments(List<AppointmentRequest> requests) {
-        List<AppointmentResponse> responses = new List<AppointmentResponse>();
+    public static List<AppointmentOutput> getAppointments(List<AppointmentRequest> requests) {
+        List<AppointmentOutput> responses = new List<AppointmentOutput>();
 
         for (AppointmentRequest req : requests) {
-            AppointmentResponse res = new AppointmentResponse();
+            AppointmentOutput out = new AppointmentOutput();
+            out.appointmentResponse = new AppointmentResponse();
 
             // Look up Account by email internally — avoids LLM ID hallucination
             List<Account> patients = [
@@ -32,14 +37,14 @@ public without sharing class OncoGetPatientAppointments {
             ];
 
             if (patients.isEmpty()) {
-                res.appointmentsList = 'No patient found with this email.';
-                res.totalAppointments = 0;
-                responses.add(res);
+                out.appointmentResponse.appointmentsList = 'No patient found with this email.';
+                out.appointmentResponse.totalAppointments = 0;
+                responses.add(out);
                 continue;
             }
 
             Id accountId = patients[0].Id;
-            res.patientAccountId = accountId;
+            out.appointmentResponse.patientAccountId = accountId;
 
             // Default to Scheduled if no filter provided
             String statusVal = String.isNotBlank(req.statusFilter) ? req.statusFilter : 'Scheduled';
@@ -74,9 +79,9 @@ public without sharing class OncoGetPatientAppointments {
             }
 
             if (appointments.isEmpty()) {
-                res.appointmentsList = 'No ' + statusVal.toLowerCase() + ' appointments found.';
-                res.totalAppointments = 0;
-                responses.add(res);
+                out.appointmentResponse.appointmentsList = 'No ' + statusVal.toLowerCase() + ' appointments found.';
+                out.appointmentResponse.totalAppointments = 0;
+                responses.add(out);
                 continue;
             }
 
@@ -121,10 +126,11 @@ public without sharing class OncoGetPatientAppointments {
                 formatted += '\n';
             }
 
-            res.appointmentsList = formatted;
-            res.totalAppointments = count;
-            responses.add(res);
+            out.appointmentResponse.appointmentsList = formatted;
+            out.appointmentResponse.totalAppointments = count;
+            responses.add(out);
         }
         return responses;
     }
 }
+

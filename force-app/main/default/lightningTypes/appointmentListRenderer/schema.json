@@ -1,0 +1,5 @@
+{
+    "title": "Appointment List Renderer",
+    "description": "Appointment List Renderer",
+    "lightning:type": "@apexClassType/c__OncoGetPatientAppointments$AppointmentResponse"
+}

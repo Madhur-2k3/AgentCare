@@ -1,0 +1,96 @@
+<template>
+    <div class="container">
+        <template lwc:if={hasAppointments}>
+            <!-- Header -->
+            <div class="header">
+                <div class="header-icon-wrap">
+                    <lightning-icon icon-name="standard:service_appointment" size="small"></lightning-icon>
+                </div>
+                <div class="header-info">
+                    <span class="header-title">Your Appointments</span>
+                    <span class="header-count">{totalAppointments} found</span>
+                </div>
+            </div>
+
+            <!-- Tap prompt -->
+            <div class="select-prompt">
+                <lightning-icon icon-name="utility:touch_action" size="xx-small" class="prompt-icon"></lightning-icon>
+                <span>Tap an appointment to reschedule</span>
+            </div>
+
+            <!-- Appointment Cards -->
+            <div class="appt-list">
+                <template for:each={appointments} for:item="appt">
+                    <div
+                        key={appt.key}
+                        class={appt.cardClass}
+                        data-apptid={appt.apptId}
+                        data-type={appt.type}
+                        data-doctor={appt.doctor}
+                        onclick={handleApptClick}
+                        role="button"
+                        tabindex="0"
+                    >
+                        <!-- Top Row: Type + Status -->
+                        <div class="appt-top-row">
+                            <span class="appt-type">{appt.type}</span>
+                            <span class={appt.statusClass}>
+                                <lightning-icon icon-name={appt.statusIcon} size="xx-small" class="status-icon"></lightning-icon>
+                                {appt.status}
+                            </span>
+                        </div>
+
+                        <!-- Doctor -->
+                        <div class="appt-doctor">
+                            <lightning-icon icon-name="standard:individual" size="xx-small" class="detail-icon"></lightning-icon>
+                            <span>{appt.doctor}</span>
+                            <template lwc:if={appt.isSelected}>
+                                <lightning-icon icon-name="utility:check" size="xx-small" class="check-icon" variant="success"></lightning-icon>
+                            </template>
+                        </div>
+
+                        <!-- Date & Time Row -->
+                        <div class="appt-datetime">
+                            <div class="datetime-item">
+                                <lightning-icon icon-name="utility:date_input" size="xx-small" class="detail-icon"></lightning-icon>
+                                <span>{appt.date}</span>
+                            </div>
+                            <div class="datetime-item">
+                                <lightning-icon icon-name="utility:clock" size="xx-small" class="detail-icon"></lightning-icon>
+                                <span>{appt.time}</span>
+                            </div>
+                        </div>
+
+                        <!-- Facility -->
+                        <div class="appt-facility">
+                            <lightning-icon icon-name="utility:location" size="xx-small" class="detail-icon"></lightning-icon>
+                            <span>{appt.facility}</span>
+                        </div>
+
+                        <!-- Appointment ID -->
+                        <div class="appt-id">
+                            <lightning-icon icon-name="utility:bookmark" size="xx-small" class="detail-icon"></lightning-icon>
+                            <span class="id-text">{appt.apptId}</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- Info message (no patient / no appointments) -->
+        <template lwc:elseif={hasInfoMessage}>
+            <div class="info-state">
+                <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                <span>{infoMessage}</span>
+            </div>
+        </template>
+
+        <!-- Empty -->
+        <template lwc:else>
+            <div class="empty-state">
+                <lightning-icon icon-name="utility:info" size="small"></lightning-icon>
+                <span>No appointment data available.</span>
+            </div>
+        </template>
+    </div>
+</template>

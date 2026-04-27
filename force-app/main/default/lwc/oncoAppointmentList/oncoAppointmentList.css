@@ -1,0 +1,236 @@
+/* ===== Container ===== */
+.container {
+    padding: 4px;
+    font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e0e5ec;
+    background: #ffffff;
+}
+
+/* ===== Header ===== */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #1a2a3a 0%, #2d3b69 50%, #5849be 100%);
+    border-radius: 12px 12px 0 0;
+}
+
+.header-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.header-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.header-count {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== Select Prompt ===== */
+.select-prompt {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #7a8f9e;
+    font-weight: 500;
+    padding: 6px 12px;
+    background: #f7f9fb;
+    border-bottom: 1px solid #eef1f5;
+}
+
+.prompt-icon {
+    flex-shrink: 0;
+}
+
+/* ===== Appointment List ===== */
+.appt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 8px;
+}
+
+/* ===== Appointment Card ===== */
+.appt-card {
+    background: #ffffff;
+    border: 1.5px solid #dce3ea;
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.appt-card:hover {
+    border-color: #5849be;
+    box-shadow: 0 3px 12px rgba(88, 73, 190, 0.12);
+    transform: translateY(-1px);
+}
+
+.appt-card:active {
+    transform: scale(0.98) translateY(0);
+}
+
+.appt-card-selected {
+    border-color: #5849be;
+    background: #f5f3ff;
+    box-shadow: 0 3px 12px rgba(88, 73, 190, 0.18);
+}
+
+/* ===== Top Row: Type + Status ===== */
+.appt-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.appt-type {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a2a3a;
+    flex: 1;
+    line-height: 1.3;
+}
+
+/* ===== Status Badges ===== */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.status-scheduled {
+    color: #0d8a6e;
+    background: #e6f7f3;
+    border: 1px solid #b4e0d2;
+}
+
+.status-completed {
+    color: #3d7e9e;
+    background: #e8f4fd;
+    border: 1px solid #b8d8ec;
+}
+
+.status-canceled {
+    color: #b8382e;
+    background: #fce8e6;
+    border: 1px solid #f0c0bb;
+}
+
+.status-icon {
+    flex-shrink: 0;
+}
+
+/* ===== Doctor Row ===== */
+.appt-doctor {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #5849be;
+    margin-bottom: 6px;
+}
+
+.appt-card-selected .appt-doctor {
+    color: #4338a0;
+}
+
+.check-icon {
+    margin-left: auto;
+}
+
+/* ===== Date & Time ===== */
+.appt-datetime {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.datetime-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #3d5060;
+    font-weight: 500;
+}
+
+/* ===== Facility ===== */
+.appt-facility {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #5a6f7e;
+    margin-top: 4px;
+}
+
+/* ===== Appointment ID ===== */
+.appt-id {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #eef1f5;
+}
+
+.id-text {
+    font-size: 10px;
+    font-weight: 600;
+    color: #7a8f9e;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    letter-spacing: 0.03em;
+}
+
+/* ===== Detail Icon ===== */
+.detail-icon {
+    flex-shrink: 0;
+}
+
+/* ===== Info / Empty States ===== */
+.info-state,
+.empty-state {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 16px;
+    color: #5a6f7e;
+    font-size: 13px;
+    font-weight: 500;
+}
