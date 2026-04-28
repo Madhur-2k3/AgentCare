@@ -50,6 +50,24 @@ public without sharing class OncoCreateAppointment {
                     WHERE Name = :req.serviceResourceName LIMIT 1
                 ];
 
+                // ── Double-check for slot conflicts before booking ──
+                List<ServiceAppointment> conflicting = [
+                    SELECT Id FROM ServiceAppointment
+                    WHERE Id IN (SELECT ServiceAppointmentId FROM AssignedResource
+                                 WHERE ServiceResourceId = :sr.Id)
+                    AND SchedStartTime < :endTime
+                    AND SchedEndTime   > :req.scheduledStartTime
+                    AND Status != 'Canceled'
+                    LIMIT 1
+                ];
+                if (!conflicting.isEmpty()) {
+                    out.bookingResponse.success = false;
+                    out.bookingResponse.confirmationMessage =
+                        'This time slot has already been booked. Please go back and choose a different slot.';
+                    responses.add(out);
+                    continue;
+                }
+
                 ServiceTerritory st = [
                     SELECT Id, Name, Street, City, State, PostalCode, Country, Description
                     FROM ServiceTerritory WHERE Id = :req.serviceTerritoryId LIMIT 1

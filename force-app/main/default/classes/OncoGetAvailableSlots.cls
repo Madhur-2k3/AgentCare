@@ -179,13 +179,16 @@ public without sharing class OncoGetAvailableSlots {
             return result;
         }
 
-        // Existing appointments
+        // Existing appointments — widen the query window by buffer times so that
+        // appointments whose buffer zones bleed into this day are also caught.
         Id srId = [SELECT Id FROM ServiceResource WHERE Name = :serviceResourceName LIMIT 1].Id;
-        DateTime dayStart = DateTime.newInstance(targetDate, Time.newInstance(0, 0, 0, 0));
-        DateTime dayEnd = DateTime.newInstance(targetDate, Time.newInstance(23, 59, 59, 0));
+        DateTime dayStart = DateTime.newInstance(targetDate, Time.newInstance(0, 0, 0, 0))
+                                .addMinutes(-blockAfter);   // catch appts whose blockAfter reaches into today
+        DateTime dayEnd   = DateTime.newInstance(targetDate, Time.newInstance(23, 59, 59, 0))
+                                .addMinutes(blockBefore);   // catch appts whose blockBefore reaches back into today
 
         List<ServiceAppointment> existingAppts = [
-            SELECT SchedStartTime, SchedEndTime FROM ServiceAppointment
+            SELECT SchedStartTime, SchedEndTime, Status FROM ServiceAppointment
             WHERE Id IN (SELECT ServiceAppointmentId FROM AssignedResource WHERE ServiceResourceId = :srId)
             AND SchedStartTime >= :dayStart AND SchedStartTime <= :dayEnd
             AND Status != 'Canceled'
@@ -202,9 +205,21 @@ public without sharing class OncoGetAvailableSlots {
 
             while (slotStart.addMinutes(totalBlock) <= windowEnd && count < 8) {
                 DateTime slotEnd = slotStart.addMinutes(duration);
+
+                // The effective occupied zone of the NEW slot includes its buffer:
+                //   [slotStart - blockBefore,  slotEnd + blockAfter]
+                DateTime newEffectiveStart = slotStart.addMinutes(-blockBefore);
+                DateTime newEffectiveEnd   = slotEnd.addMinutes(blockAfter);
+
                 Boolean hasConflict = false;
                 for (ServiceAppointment existing : existingAppts) {
-                    if (slotStart < existing.SchedEndTime && slotEnd > existing.SchedStartTime) {
+                    // The effective occupied zone of the EXISTING appointment:
+                    //   [SchedStartTime - blockBefore,  SchedEndTime + blockAfter]
+                    DateTime existEffStart = existing.SchedStartTime.addMinutes(-blockBefore);
+                    DateTime existEffEnd   = existing.SchedEndTime.addMinutes(blockAfter);
+
+                    // Standard overlap: two intervals [A,B) and [C,D) overlap iff A < D && B > C
+                    if (newEffectiveStart < existEffEnd && newEffectiveEnd > existEffStart) {
                         hasConflict = true;
                         break;
                     }
