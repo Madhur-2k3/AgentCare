@@ -223,10 +223,13 @@ export default class OncoSlotPicker extends LightningElement {
         const startTime = event.currentTarget.dataset.start;
         const endTime = event.currentTarget.dataset.end;
         const date = event.currentTarget.dataset.date;
+        const isoStart = event.currentTarget.dataset.iso;
 
         this.selectedSlotKey = key;
 
-        const utterance = `I want the ${startTime} to ${endTime} slot on ${date}`;
+        // Include the exact GMT ISO DateTime so the agent passes the precise
+        // value to the booking action — avoids timezone interpretation issues.
+        const utterance = `I want the ${startTime} to ${endTime} slot on ${date} (scheduledStartTime: ${isoStart})`;
 
         if (this.configuration && this.configuration.util) {
             const util = this.configuration.util;
@@ -238,7 +241,7 @@ export default class OncoSlotPicker extends LightningElement {
             }
         } else {
             this.dispatchEvent(new CustomEvent('slotselected', {
-                detail: { date, startTime, endTime, utterance },
+                detail: { date, startTime, endTime, isoStart, utterance },
                 bubbles: true,
                 composed: true
             }));
@@ -252,7 +255,12 @@ export default class OncoSlotPicker extends LightningElement {
 
         const blocks = raw.split('\n').filter(b => b.trim());
         return blocks.map(line => {
-            const cleaned = line.replace(/^\d+\.\s*/, '');
+            // Split off the ISO timestamp appended after the pipe
+            const pipeParts = line.split('|');
+            const isoStart = pipeParts.length > 1 ? pipeParts[1].trim() : '';
+            const mainPart = pipeParts[0];
+
+            const cleaned = mainPart.replace(/^\d+\.\s*/, '');
             let date = '', startTime = '', endTime = '', duration = '';
 
             const dashSplit = cleaned.split(' — ');
@@ -274,7 +282,7 @@ export default class OncoSlotPicker extends LightningElement {
             const isSelected = key === this.selectedSlotKey;
             const pillClass = 'slot-pill' + (isSelected ? ' slot-pill-selected' : '');
 
-            return { key, date, startTime, endTime, duration, period, periodIcon, isSelected, pillClass };
+            return { key, date, startTime, endTime, duration, period, periodIcon, isSelected, pillClass, isoStart };
         });
     }
 }

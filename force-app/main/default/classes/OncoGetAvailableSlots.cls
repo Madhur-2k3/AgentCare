@@ -228,7 +228,9 @@ public without sharing class OncoGetAvailableSlots {
                     count++;
                     formatted += count + '. ' + targetDate.format() + ' — ';
                     formatted += slotStart.format('h:mm a') + ' to ' + slotEnd.format('h:mm a');
-                    formatted += ' (' + duration + ' min)\n';
+                    formatted += ' (' + duration + ' min)';
+                    // Append GMT ISO timestamp so the LWC can send the exact DateTime
+                    formatted += '|' + slotStart.formatGmt('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'') + '\n';
                 }
                 slotStart = slotStart.addMinutes(30);
             }
