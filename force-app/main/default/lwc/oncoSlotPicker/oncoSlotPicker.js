@@ -229,7 +229,7 @@ export default class OncoSlotPicker extends LightningElement {
 
         // Include the exact GMT ISO DateTime so the agent passes the precise
         // value to the booking action — avoids timezone interpretation issues.
-        const utterance = `I want the ${startTime} to ${endTime} slot on ${date} (scheduledStartTime: ${isoStart})`;
+        const utterance = `I want the ${startTime} to ${endTime} slot on ${date} `;
 
         if (this.configuration && this.configuration.util) {
             const util = this.configuration.util;
