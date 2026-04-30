@@ -90,6 +90,11 @@ export default class OncoBookingConfirmation extends LightningElement {
         return this.value.confirmationMessage;
     }
 
+    get receiptUrl() {
+        if (!this.booking || !this.booking.appointmentId) return '#';
+        return '/apex/OncoBookingReceipt?id=' + this.booking.appointmentId;
+    }
+
     connectedCallback() {
         console.log('BookingConfirmation value:', JSON.stringify(this.value));
     }

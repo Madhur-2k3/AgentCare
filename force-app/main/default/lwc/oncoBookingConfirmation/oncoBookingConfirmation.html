@@ -91,6 +91,14 @@
                             <span>{booking.arrivalNote}</span>
                         </div>
                     </template>
+
+                    <!-- Download Receipt Button -->
+                    <div class="receipt-action">
+                        <a href={receiptUrl} target="_blank" class="download-btn" rel="noopener noreferrer">
+                            <lightning-icon icon-name="utility:download" size="xx-small" class="download-icon"></lightning-icon>
+                            <span>Download Receipt (PDF)</span>
+                        </a>
+                    </div>
                 </template>
             </div>
         </template>

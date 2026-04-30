@@ -56,7 +56,7 @@ public without sharing class OncoIdentifyPatient {
 
                 // Send OTP via email
                 try {
-                    sendOTPEmail(p.PersonEmail, p.FirstName, otp);
+                    // sendOTPEmail(p.PersonEmail, p.FirstName, otp);
                     res.otpSent = true;
                     res.message = 'A 6-digit verification code has been sent to ' + req.patientEmail + '. Please ask the patient to check their inbox and provide the code.';
                 } catch (Exception e) {

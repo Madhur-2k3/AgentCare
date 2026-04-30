@@ -198,6 +198,8 @@ public without sharing class OncoGetAvailableSlots {
         // Calculate windows
         String formatted = '';
         Integer count = 0;
+        DateTime rightNow = DateTime.now();
+
         for (TimeSlot ts : doctorSlots) {
             DateTime windowStart = DateTime.newInstance(targetDate, ts.StartTime);
             DateTime windowEnd = DateTime.newInstance(targetDate, ts.EndTime);
@@ -205,6 +207,12 @@ public without sharing class OncoGetAvailableSlots {
 
             while (slotStart.addMinutes(totalBlock) <= windowEnd && count < 8) {
                 DateTime slotEnd = slotStart.addMinutes(duration);
+
+                // Skip slots that have already passed (same-day bookings)
+                if (slotStart < rightNow) {
+                    slotStart = slotStart.addMinutes(30);
+                    continue;
+                }
 
                 // The effective occupied zone of the NEW slot includes its buffer:
                 //   [slotStart - blockBefore,  slotEnd + blockAfter]

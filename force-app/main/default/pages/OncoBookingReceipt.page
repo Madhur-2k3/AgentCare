@@ -1,0 +1,382 @@
+<apex:page controller="OncoBookingReceiptController"
+           renderAs="pdf"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false"
+           applyHtmlTag="false"
+           applyBodyTag="false">
+<html>
+<head>
+    <style type="text/css">
+        /* ===== PDF Reset and Base ===== */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #1a1a2e;
+            background: #ffffff;
+            font-size: 11pt;
+            line-height: 1.5;
+        }
+
+        /* ===== Page Wrapper ===== */
+        .page-wrap {
+            padding: 0 40px 40px;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            padding: 30px 40px 20px;
+            border-bottom: 3px solid #2e844a;
+        }
+
+        .header-inner {
+            display: table;
+            width: 100%;
+        }
+
+        .logo-cell {
+            display: table-cell;
+            vertical-align: middle;
+            width: 60px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .brand-cell {
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 14px;
+        }
+
+        .brand-name {
+            font-size: 22pt;
+            font-weight: 700;
+            color: #2e844a;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-tagline {
+            font-size: 9pt;
+            color: #706e6b;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .receipt-badge-cell {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .receipt-badge {
+            display: inline-block;
+            background: #2e844a;
+            color: #ffffff;
+            font-size: 9pt;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* ===== Status and ID Bar ===== */
+        .status-bar {
+            margin-top: 24px;
+            padding: 14px 20px;
+            background: #f0faf3;
+            border: 1px solid #c9e8d1;
+            border-radius: 6px;
+        }
+
+        .status-bar-inner {
+            display: table;
+            width: 100%;
+        }
+
+        .status-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .status-label {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #706e6b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-value {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #2e844a;
+            margin-top: 2px;
+        }
+
+        .id-cell {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .id-label {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #706e6b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .id-value {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #2e844a;
+            font-family: 'Courier New', monospace;
+            margin-top: 2px;
+        }
+
+        /* ===== Section Title ===== */
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #2e844a;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 28px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e8e8e8;
+        }
+
+        /* ===== Detail Table ===== */
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .detail-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        .detail-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            width: 160px;
+            font-size: 9pt;
+            font-weight: 700;
+            color: #706e6b;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .detail-value {
+            font-size: 11pt;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .detail-value-highlight {
+            font-weight: 700;
+            color: #2e844a;
+            font-size: 12pt;
+        }
+
+        .detail-row-highlight td {
+            background: #f0faf3;
+        }
+
+        /* ===== Preparation Box ===== */
+        .prep-box {
+            margin-top: 24px;
+            padding: 16px 20px;
+            background: #e8f4fd;
+            border: 1px solid #b8daf2;
+            border-radius: 6px;
+        }
+
+        .prep-title {
+            font-size: 9pt;
+            font-weight: 700;
+            color: #0d6ebd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .prep-text {
+            font-size: 10pt;
+            color: #0d6ebd;
+            line-height: 1.6;
+        }
+
+        /* ===== Arrival Notice ===== */
+        .arrival-box {
+            margin-top: 16px;
+            padding: 12px 20px;
+            background: #fef7e8;
+            border: 1px solid #f2d06b;
+            border-radius: 6px;
+        }
+
+        .arrival-text {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #8a6d00;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 2px solid #2e844a;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #2e844a;
+        }
+
+        .footer-contact {
+            font-size: 9pt;
+            color: #706e6b;
+            margin-top: 4px;
+        }
+
+        .footer-generated {
+            font-size: 8pt;
+            color: #b0b0b0;
+            margin-top: 10px;
+        }
+
+        /* ===== No Data ===== */
+        .no-data {
+            text-align: center;
+            padding: 80px 40px;
+            color: #706e6b;
+            font-size: 14pt;
+        }
+    </style>
+</head>
+<body>
+    <apex:outputPanel rendered="{!hasAppointment}">
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <div class="header-inner">
+                <div class="logo-cell">
+                    <apex:image url="{!$Resource.OncoLogo}" styleClass="logo-img" />
+                </div>
+                <div class="brand-cell">
+                    <div class="brand-name">Onco Global</div>
+                    <div class="brand-tagline">Comprehensive Cancer Care</div>
+                </div>
+                <div class="receipt-badge-cell">
+                    <span class="receipt-badge">Booking Confirmation</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-wrap">
+            <!-- ===== STATUS BAR ===== -->
+            <div class="status-bar">
+                <div class="status-bar-inner">
+                    <div class="status-cell">
+                        <div class="status-label">Status</div>
+                        <div class="status-value">{!status}</div>
+                    </div>
+                    <div class="id-cell">
+                        <div class="id-label">Appointment Number</div>
+                        <div class="id-value">{!appointmentNumber}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PATIENT AND PROVIDER DETAILS ===== -->
+            <div class="section-title">Appointment Details</div>
+            <table class="detail-table">
+                <tr>
+                    <td class="detail-label">Patient</td>
+                    <td class="detail-value">{!patientName}</td>
+                </tr>
+                <tr>
+                    <td class="detail-label">Doctor</td>
+                    <td class="detail-value">{!doctorName}</td>
+                </tr>
+                <tr>
+                    <td class="detail-label">Appointment Type</td>
+                    <td class="detail-value">{!appointmentType}</td>
+                </tr>
+                <tr class="detail-row-highlight">
+                    <td class="detail-label">Date &amp; Time</td>
+                    <td class="detail-value detail-value-highlight">{!formattedDateTime}</td>
+                </tr>
+                <tr>
+                    <td class="detail-label">Duration</td>
+                    <td class="detail-value">{!duration}</td>
+                </tr>
+            </table>
+
+            <!-- ===== FACILITY DETAILS ===== -->
+            <div class="section-title">Facility Information</div>
+            <table class="detail-table">
+                <tr>
+                    <td class="detail-label">Facility</td>
+                    <td class="detail-value">{!facilityName}</td>
+                </tr>
+                <tr>
+                    <td class="detail-label">Address</td>
+                    <td class="detail-value">{!address}</td>
+                </tr>
+            </table>
+
+            <!-- ===== PREPARATION ===== -->
+            <apex:outputPanel rendered="{!hasPreparation}">
+                <div class="prep-box">
+                    <div class="prep-title">Preparation Instructions</div>
+                    <div class="prep-text">{!preparation}</div>
+                </div>
+            </apex:outputPanel>
+
+            <!-- ===== ARRIVAL NOTICE ===== -->
+            <div class="arrival-box">
+                <div class="arrival-text">Please arrive 15 minutes before your scheduled appointment time.</div>
+            </div>
+
+            <!-- ===== FOOTER ===== -->
+            <div class="footer">
+                <div class="footer-brand">Onco Global - Comprehensive Cancer Care</div>
+                <div class="footer-contact">For assistance, call 1800-ONCO-HELP | support@oncoglobal.care</div>
+                <div class="footer-generated">Receipt generated on {!generatedDate}</div>
+            </div>
+        </div>
+    </apex:outputPanel>
+
+    <!-- ===== NO DATA STATE ===== -->
+    <apex:outputPanel rendered="{!!hasAppointment}">
+        <div class="no-data">
+            No appointment found. Please verify the appointment ID and try again.
+        </div>
+    </apex:outputPanel>
+</body>
+</html>
+</apex:page>
