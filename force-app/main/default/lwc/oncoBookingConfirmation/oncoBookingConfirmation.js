@@ -92,7 +92,11 @@ export default class OncoBookingConfirmation extends LightningElement {
 
     get receiptUrl() {
         if (!this.booking || !this.booking.appointmentId) return '#';
-        return '/apex/OncoBookingReceipt?id=' + this.booking.appointmentId;
+        // Use the community base path so it works on Experience Cloud sites
+        // On a site like orgfarm-xxx.my.site.com/OncoGlobalPatientPortal1/s/
+        // the VF page is accessible at /OncoGlobalPatientPortal1/apex/OncoBookingReceipt
+        const basePath = window.location.pathname.split('/s/')[0] || '';
+        return basePath + '/apex/OncoBookingReceipt?id=' + this.booking.appointmentId;
     }
 
     connectedCallback() {

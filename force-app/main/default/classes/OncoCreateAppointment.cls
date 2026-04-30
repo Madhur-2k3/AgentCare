@@ -125,6 +125,15 @@ public without sharing class OncoCreateAppointment {
                 }
                 insert appt;
 
+                // Populate the booking receipt URL on the appointment
+                // Use Site.getBaseUrl() for Experience Cloud, fallback to org URL
+                String baseUrl = Site.getBaseUrl();
+                if (String.isBlank(baseUrl)) {
+                    baseUrl = URL.getOrgDomainURL().toExternalForm();
+                }
+                appt.ApptBookingInfoUrl = baseUrl + '/apex/OncoBookingReceipt?id=' + appt.Id;
+                update appt;
+
                 AssignedResource assignedRes = new AssignedResource(
                     ServiceAppointmentId = appt.Id,
                     ServiceResourceId = sr.Id
