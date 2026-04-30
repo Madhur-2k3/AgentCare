@@ -1,0 +1,251 @@
+/* ===== Container ===== */
+.container {
+    padding: 8px 4px;
+    font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== Header ===== */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #181818;
+    letter-spacing: 0.02em;
+}
+
+/* ===== Select Prompt ===== */
+.select-prompt {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #706e6b;
+    margin-bottom: 10px;
+    padding: 4px 8px;
+    background: #fafaf9;
+    border-radius: 6px;
+}
+
+.prompt-icon {
+    flex-shrink: 0;
+}
+
+/* ===== Provider List ===== */
+.provider-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ===== Provider Card ===== */
+.provider-card {
+    background: #f7f8ff;
+    border: 1px solid #d3d5e8;
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease,
+                background-color 0.2s ease, transform 0.1s ease;
+}
+
+.provider-card:hover {
+    border-color: #5849be;
+    box-shadow: 0 3px 12px rgba(88, 73, 190, 0.14);
+    background: #eeedfa;
+}
+
+.provider-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 4px rgba(88, 73, 190, 0.18);
+}
+
+/* ===== Selected Card ===== */
+.provider-card-selected {
+    border-color: #2e844a;
+    background: #ecfaf0;
+    box-shadow: 0 3px 12px rgba(46, 132, 74, 0.15);
+}
+
+.provider-card-selected:hover {
+    border-color: #2e844a;
+    background: #e0f5e7;
+    box-shadow: 0 3px 14px rgba(46, 132, 74, 0.2);
+}
+
+/* ===== Card Top (Avatar + Name) ===== */
+.card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+/* ===== Avatar ===== */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7b68ee, #5849be);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.provider-card-selected .avatar {
+    background: linear-gradient(135deg, #4caf50, #2e844a);
+}
+
+.avatar-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+}
+
+/* ===== Card Header Info ===== */
+.card-header-info {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ===== Provider Name Row ===== */
+.provider-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.provider-name-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #5849be;
+    flex: 1;
+    line-height: 1.3;
+}
+
+.provider-card-selected .provider-name-text {
+    color: #2e844a;
+}
+
+/* ===== Check Icon ===== */
+.check-icon {
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+/* ===== Specialty Badge ===== */
+.provider-specialty {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.specialty-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #5849be;
+    background: #e8e6f9;
+    border: 1px solid #c9c3f0;
+    border-radius: 10px;
+    padding: 2px 10px;
+    letter-spacing: 0.01em;
+}
+
+.provider-card-selected .specialty-badge {
+    color: #2e844a;
+    background: #d5f0dc;
+    border-color: #91d5a3;
+}
+
+/* ===== Card Details ===== */
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 8px;
+    border-top: 1px solid #eaeaf3;
+}
+
+/* ===== Detail Row ===== */
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: #54698d;
+    line-height: 1.4;
+}
+
+.detail-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.detail-text {
+    flex: 1;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 16px;
+    text-align: center;
+}
+
+.empty-icon-wrap {
+    opacity: 0.5;
+}
+
+.empty-text {
+    font-size: 13px;
+    color: #54698d;
+    line-height: 1.5;
+}
+
+/* ===== Specialties Section (Empty State) ===== */
+.specialties-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.specialties-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #706e6b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.specialties-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.specialty-pill {
+    font-size: 11px;
+    color: #5849be;
+    background: #f0eefa;
+    border: 1px solid #d3d5e8;
+    border-radius: 12px;
+    padding: 3px 10px;
+    font-weight: 500;
+}

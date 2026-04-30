@@ -18,12 +18,18 @@ public without sharing class OncoDiscoverProviders {
         public String availableSpecialties;
     }
 
+    // Outer wrapper — wrapper OF the inner wrapper (required for Lightning Types)
+    public class ProviderOutput {
+        @InvocableVariable public ProviderResponse providerResponse;
+    }
+
     @InvocableMethod(label='Discover Providers' description='Search for doctors by city, specialty, or name across all Onco Global facilities')
-    public static List<ProviderResponse> discoverProviders(List<ProviderRequest> requests) {
-        List<ProviderResponse> responses = new List<ProviderResponse>();
+    public static List<ProviderOutput> discoverProviders(List<ProviderRequest> requests) {
+        List<ProviderOutput> responses = new List<ProviderOutput>();
 
         for (ProviderRequest req : requests) {
-            ProviderResponse res = new ProviderResponse();
+            ProviderOutput res = new ProviderOutput();
+            res.providerResponse = new ProviderResponse();
 
             // Always provide available specialties for context
             List<CareSpecialty> allSpecs = [SELECT Name FROM CareSpecialty ORDER BY Name];
@@ -31,7 +37,7 @@ public without sharing class OncoDiscoverProviders {
             for (CareSpecialty cs : allSpecs) {
                 specNames.add(cs.Name);
             }
-            res.availableSpecialties = String.join(specNames, ', ');
+            res.providerResponse.availableSpecialties = String.join(specNames, ', ');
 
             // Build dynamic query for ServiceTerritoryMember
             String query = 'SELECT ServiceResource.Name, ServiceResource.Id, '
@@ -67,8 +73,8 @@ public without sharing class OncoDiscoverProviders {
             List<ServiceTerritoryMember> members = Database.query(query);
 
             if (members.isEmpty()) {
-                res.providersList = 'No providers found matching your criteria. Try broadening your search.';
-                res.totalProviders = 0;
+                res.providerResponse.providersList = 'No providers found matching your criteria. Try broadening your search.';
+                res.providerResponse.totalProviders = 0;
                 responses.add(res);
                 continue;
             }
@@ -147,11 +153,11 @@ public without sharing class OncoDiscoverProviders {
 
             if (count == 0) {
                 formatted = 'No providers found for the specialty "' + req.specialty 
-                    + '". Available specialties: ' + res.availableSpecialties;
+                    + '". Available specialties: ' + res.providerResponse.availableSpecialties;
             }
 
-            res.providersList = formatted;
-            res.totalProviders = count;
+            res.providerResponse.providersList = formatted;
+            res.providerResponse.totalProviders = count;
             responses.add(res);
         }
         return responses;

@@ -1,0 +1,88 @@
+<template>
+    <div class="container">
+        <template lwc:if={hasProviders}>
+            <div class="header">
+                <lightning-icon icon-name="standard:care_request" size="small"></lightning-icon>
+                <span class="header-text">{totalProviders} Providers Found</span>
+            </div>
+            <div class="select-prompt">
+                <lightning-icon icon-name="utility:touch_action" size="xx-small" class="prompt-icon"></lightning-icon>
+                <span>Tap a provider to book an appointment</span>
+            </div>
+            <div class="provider-list">
+                <template for:each={providers} for:item="provider">
+                    <div key={provider.resource}
+                         class={provider.cardClass}
+                         data-resource={provider.resource}
+                         data-name={provider.name}
+                         onclick={handleProviderClick}
+                         role="button"
+                         tabindex="0">
+                        <div class="card-top">
+                            <div class="avatar">
+                                <span class="avatar-text">{provider.initials}</span>
+                            </div>
+                            <div class="card-header-info">
+                                <div class="provider-name-row">
+                                    <span class="provider-name-text">{provider.name}</span>
+                                    <template lwc:if={provider.isSelected}>
+                                        <lightning-icon icon-name="utility:check" size="xx-small" class="check-icon" variant="success"></lightning-icon>
+                                    </template>
+                                </div>
+                                <template lwc:if={provider.specialty}>
+                                    <div class="provider-specialty">
+                                        <span class="specialty-badge">{provider.specialty}</span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="card-details">
+                            <template lwc:if={provider.facility}>
+                                <div class="detail-row">
+                                    <lightning-icon icon-name="utility:location" size="xx-small" class="detail-icon"></lightning-icon>
+                                    <span class="detail-text">{provider.facility}</span>
+                                </div>
+                            </template>
+                            <template lwc:if={provider.city}>
+                                <div class="detail-row">
+                                    <lightning-icon icon-name="utility:world" size="xx-small" class="detail-icon"></lightning-icon>
+                                    <span class="detail-text">{provider.city}</span>
+                                </div>
+                            </template>
+                            <template lwc:if={provider.title}>
+                                <div class="detail-row">
+                                    <lightning-icon icon-name="utility:identity" size="xx-small" class="detail-icon"></lightning-icon>
+                                    <span class="detail-text">{provider.title}</span>
+                                </div>
+                            </template>
+                            <template lwc:if={provider.schedule}>
+                                <div class="detail-row">
+                                    <lightning-icon icon-name="utility:clock" size="xx-small" class="detail-icon"></lightning-icon>
+                                    <span class="detail-text">{provider.schedule}</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="empty-state">
+                <div class="empty-icon-wrap">
+                    <lightning-icon icon-name="utility:search" size="small"></lightning-icon>
+                </div>
+                <span class="empty-text">{emptyMessage}</span>
+                <template lwc:if={hasSpecialties}>
+                    <div class="specialties-section">
+                        <span class="specialties-label">Available Specialties:</span>
+                        <div class="specialties-pills">
+                            <template for:each={specialtyPills} for:item="spec">
+                                <span key={spec} class="specialty-pill">{spec}</span>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>
