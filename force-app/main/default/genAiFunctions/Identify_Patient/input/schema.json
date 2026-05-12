@@ -1,0 +1,14 @@
+{
+  "required" : [ "patientEmail" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "patientEmail" : {
+      "title" : "patientEmail",
+      "description" : "Patient registered email address",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -165,4 +165,3 @@ public without sharing class OncoCreateAppointment {
         return responses;
     }
 }
-

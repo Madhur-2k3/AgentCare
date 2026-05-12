@@ -5,6 +5,10 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>AppointmentEmailService</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
         <members>*</members>
         <name>ApexComponent</name>
     </types>

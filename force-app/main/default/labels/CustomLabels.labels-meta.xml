@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>EM_Container_Base_CwcMinimizedState_04Ibm000000h7hN_9675743</fullName>
+        <categories>EmbeddedMessaging</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EM_Container_Base_CwcMinimizedState_04Ibm000000h7hN_9675743</shortDescription>
+        <value>Onco Assist</value>
+    </labels>
+</CustomLabels>

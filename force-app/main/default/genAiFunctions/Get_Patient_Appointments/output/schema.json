@@ -1,0 +1,15 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "appointmentResponse" : {
+      "title" : "appointmentResponse",
+      "description" : "Show the list to the patient. Ask which appointment they want to reschedule. Note the Appointment ID, doctor Resource name (SR_xxx), WorkType name, and facility from their selection.\nIf 0, inform the patient they have no upcoming appointments.",
+      "lightning:type" : "c__appointmentListRenderer",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Advertising Inventory Calendar</label>
+    <navType>Console</navType>
+    <tabs>standard-SfiAdsInventoryManagementWrapper</tabs>
+    <tabs>Test_Drive__c</tabs>
+    <uiType>Lightning</uiType>
+    <workspaceConfig>
+        <mappings>
+            <tab>Test_Drive__c</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-SfiAdsInventoryManagementWrapper</tab>
+        </mappings>
+    </workspaceConfig>
+</CustomApplication>

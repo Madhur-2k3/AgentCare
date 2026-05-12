@@ -1,0 +1,14 @@
+{
+  "required" : [ "city" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "city" : {
+      "title" : "city",
+      "description" : "The city where the patient wants to visit. Ask the patient which city they prefer. Valid cities are: Hyderabad, Bengaluru, Chennai, Mumbai, New Delhi. If the patient was identified earlier, you can suggest their billing city as a default.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

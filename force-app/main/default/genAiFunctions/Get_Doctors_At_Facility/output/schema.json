@@ -1,0 +1,15 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "doctorResponse" : {
+      "title" : "doctorResponse",
+      "description" : "Show this list to the patient and ask them to select a doctor. Remember the Resource name (SR_xxx) of the doctor they choose — you will need it for checking available slots and booking.",
+      "lightning:type" : "c__doctorRenderer",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

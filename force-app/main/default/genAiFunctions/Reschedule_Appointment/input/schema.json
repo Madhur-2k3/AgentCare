@@ -1,0 +1,21 @@
+{
+  "required" : [ "appointmentId", "newStartTime" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "appointmentId" : {
+      "title" : "appointmentId",
+      "description" : "Use the Appointment ID from the appointment the patient selected to reschedule.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "newStartTime" : {
+      "title" : "newStartTime",
+      "description" : "Use the exact start time from the slot the patient selected. Format: YYYY-MM-DDThh:mm:ss.",
+      "lightning:type" : "lightning__dateTimeStringType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

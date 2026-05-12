@@ -1,0 +1,13 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "dummyInput" : {
+      "title" : "dummyInput",
+      "description" : "Pass any value like 'fetch'. This input is not used — the action returns all active appointment reasons automatically.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

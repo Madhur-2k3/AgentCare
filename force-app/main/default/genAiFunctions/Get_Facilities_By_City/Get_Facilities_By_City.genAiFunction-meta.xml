@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Find Onco Global facilities/territories in a given city</description>
+    <developerName>Get_Facilities_By_City</developerName>
+    <invocationTarget>OncoGetFacilitiesByCity</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Facilities_By_City</localDeveloperName>
+    <masterLabel>Get Facilities By City</masterLabel>
+    <progressIndicatorMessage>Loading</progressIndicatorMessage>
+</GenAiFunction>

@@ -1,0 +1,21 @@
+{
+  "required" : [ "serviceTerritoryId" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "serviceTerritoryId" : {
+      "title" : "serviceTerritoryId",
+      "description" : "ServiceTerritory Id of the selected facility",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "workTypeName" : {
+      "title" : "workTypeName",
+      "description" : "WorkType name to filter doctors by matching specialty (e.g. Follow-Up Review, Surgical Consultation)",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -133,4 +133,3 @@ public without sharing class OncoGetPatientAppointments {
         return responses;
     }
 }
-

@@ -1,0 +1,21 @@
+{
+  "required" : [ "appointmentId" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "appointmentId" : {
+      "title" : "appointmentId",
+      "description" : "Use the Appointment ID from the appointment the patient selected to cancel.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "cancellationReason" : {
+      "title" : "cancellationReason",
+      "description" : "Ask the patient why they want to cancel.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Search for doctors by city, specialty, or name across all Onco Global facilities</description>
+    <developerName>Discover_Providers</developerName>
+    <invocationTarget>OncoDiscoverProviders</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Discover_Providers</localDeveloperName>
+    <masterLabel>Discover Providers</masterLabel>
+    <progressIndicatorMessage>Discovering Doctors</progressIndicatorMessage>
+</GenAiFunction>

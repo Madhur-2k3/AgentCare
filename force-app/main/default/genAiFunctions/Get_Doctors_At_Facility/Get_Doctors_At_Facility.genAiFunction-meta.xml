@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Find doctors at a facility, optionally filtered by specialty from WorkType</description>
+    <developerName>Get_Doctors_At_Facility</developerName>
+    <invocationTarget>OncoGetDoctorsAtFacility</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Doctors_At_Facility</localDeveloperName>
+    <masterLabel>Get Doctors At Facility</masterLabel>
+    <progressIndicatorMessage>Fetching Doctors List</progressIndicatorMessage>
+</GenAiFunction>

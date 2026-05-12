@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Find available appointment slots based on doctor operating hours and existing bookings</description>
+    <developerName>Get_Available_Slots</developerName>
+    <invocationTarget>OncoGetAvailableSlots</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Available_Slots</localDeveloperName>
+    <masterLabel>Get Available Slots</masterLabel>
+    <progressIndicatorMessage>Fetching Slots</progressIndicatorMessage>
+</GenAiFunction>

@@ -1,0 +1,27 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "city" : {
+      "title" : "city",
+      "description" : "Ask if the patient has a preferred city. Available cities: Hyderabad, Bengaluru, Chennai, Mumbai, New Delhi.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "doctorName" : {
+      "title" : "doctorName",
+      "description" : "If the patient asks about a specific doctor, extract the name.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "specialty" : {
+      "title" : "specialty",
+      "description" : "Determine from the patient's description. Map symptoms to specialties using the mapping in the topic instructions.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

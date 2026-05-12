@@ -1,0 +1,35 @@
+{
+  "required" : [ "preferredDate", "serviceResourceName", "serviceTerritoryId", "workTypeName" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "preferredDate" : {
+      "title" : "preferredDate",
+      "description" : "Preferred date for the appointment (at least 2 days from today)",
+      "lightning:type" : "lightning__dateType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "serviceResourceName" : {
+      "title" : "serviceResourceName",
+      "description" : "Doctor service resource name e.g. SR_Ananya_Rao",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "serviceTerritoryId" : {
+      "title" : "serviceTerritoryId",
+      "description" : "ServiceTerritory Id of the selected facility",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "workTypeName" : {
+      "title" : "workTypeName",
+      "description" : "WorkType name e.g. Follow-Up Review, New Patient Consultation",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

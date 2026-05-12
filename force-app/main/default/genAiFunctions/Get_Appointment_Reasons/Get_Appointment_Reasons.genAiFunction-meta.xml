@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Retrieve active appointment reasons for patient self-scheduling</description>
+    <developerName>Get_Appointment_Reasons</developerName>
+    <invocationTarget>OncoGetAppointmentReasons</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Appointment_Reasons</localDeveloperName>
+    <masterLabel>Get Appointment Reasons</masterLabel>
+    <progressIndicatorMessage>Fetching</progressIndicatorMessage>
+</GenAiFunction>

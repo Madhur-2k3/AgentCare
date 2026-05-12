@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Retrieve upcoming or past appointments for a patient using their email</description>
+    <developerName>Get_Patient_Appointments</developerName>
+    <invocationTarget>OncoGetPatientAppointments</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Patient_Appointments</localDeveloperName>
+    <masterLabel>Get Patient Appointments</masterLabel>
+    <progressIndicatorMessage>Fetching Appointments</progressIndicatorMessage>
+</GenAiFunction>

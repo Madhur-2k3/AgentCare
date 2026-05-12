@@ -1,0 +1,42 @@
+{
+  "required" : [ "patientAccountId", "scheduledStartTime", "serviceResourceName", "serviceTerritoryId", "workTypeName" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "patientAccountId" : {
+      "title" : "patientAccountId",
+      "description" : "Patient Person Account Id",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "scheduledStartTime" : {
+      "title" : "scheduledStartTime",
+      "description" : "Confirmed start date and time",
+      "lightning:type" : "lightning__dateTimeStringType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "serviceResourceName" : {
+      "title" : "serviceResourceName",
+      "description" : "Doctor service resource name e.g. SR_Ananya_Rao",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "serviceTerritoryId" : {
+      "title" : "serviceTerritoryId",
+      "description" : "ServiceTerritory Id of the facility",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "workTypeName" : {
+      "title" : "workTypeName",
+      "description" : "WorkType name e.g. Follow-Up Review",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

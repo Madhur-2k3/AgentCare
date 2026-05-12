@@ -1,0 +1,21 @@
+{
+  "required" : [ "patientEmail" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "patientEmail" : {
+      "title" : "patientEmail",
+      "description" : "Patient registered email address used during identification",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "statusFilter" : {
+      "title" : "statusFilter",
+      "description" : "Filter by status: Scheduled, Completed, Canceled, or All. Default is Scheduled.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
